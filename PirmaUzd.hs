@@ -1,3 +1,4 @@
+-- ^ author Juste Andziulyte
 module PirmaUzd
 where
 
