@@ -85,7 +85,7 @@ readIndicator _ = error "Indicator expected"
 
 -- ^ skips unnecessary white spaces
 wipeWhite :: String -> String
-wipeWhite (' ':rest) = wipeWhite rest -- ^ rekursijaaaaaa
+wipeWhite (' ':rest) = wipeWhite rest
 wipeWhite (h:rest) = [h] ++ rest
 
 -- ^ reads digit of position
