@@ -6,10 +6,7 @@ import Data.Char
 import Data.List
 
 msg :: String
-msg = "(l  (m   \"x\"   1  \"y\"   2 \"v\" \"x\") (m   \"x\" 1   \"y\" 1 \"v\" \"o\") (m \"x\"  0 \"y\" 0 \"v\" \"x\") (m  \"x\"  2 \"y\" 1 \"v\"  \"o\") (m  \"x\"  2 \"y\"  1   \"v\" \"x\"))"
-
-parsed :: [Move]
-parsed = parse msg
+msg = "(l  (m   \"x\"   1  \"y\"   2 \"v\" \"x\") (m   \"x\" 1   \"y\" 1 \"v\" \"o\") (m \"x\"  0 \"y\" 0 \"v\" \"x\") (m  \"x\"  2 \"y\" 1 \"v\"  \"o\") (m  \"x\"  2 \"y\"  2   \"v\" \"x\"))"
 
 data Move = Move{
     posX :: Int
@@ -31,14 +28,21 @@ validate a =
   
 -- ^ checks whether 2 moves are not in the same node
 isValidPositions :: Moves -> Bool
-isValidPositions [] = True
-isValidPositions (h1:rest) = notElem h1 rest && isValidPositions rest -- ^ rekursijaaa
+isValidPositions l =
+  isValid True l 
+    where
+      isValid :: Bool -> Moves -> Bool
+      isValid acc [] = acc
+      isValid acc (h1:rest) = isValid (acc && notElem h1 rest) rest
 
 -- ^ checks whether  moves in a row are not same
-isValidSymbols :: Moves ->Bool
-isValidSymbols a = case (tail a) of
-  [] -> True
-  (h1:a) -> not(((z h1) == (z ( head a))) || isValidSymbols a) -- ^ rekursijaaa
+isValidSymbols :: Moves -> Bool
+isValidSymbols l = 
+  isValid True l 
+    where
+      isValid :: Bool -> Moves ->Bool 
+      isValid acc (_:[]) = acc
+      isValid acc (h1:rest) = isValid (acc && not((z h1) == (z (head rest)))) rest
 
 -- ^ parses given s-exp String to list of moves
 parse :: String -> Moves
