@@ -4,9 +4,7 @@ where
 
 import Data.Char
 import Data.List
-
-msg :: String
-msg = "(l  (m   \"x\"   1  \"y\"   2 \"v\" \"x\") (m   \"x\" 1   \"y\" 1 \"v\" \"o\") (m \"x\"  0 \"y\" 0 \"v\" \"x\") (m  \"x\"  2 \"y\" 1 \"v\"  \"o\") (m  \"x\"  2 \"y\"  2   \"v\" \"x\"))"
+import TestData
 
 data Move = Move{
     posX :: Int
